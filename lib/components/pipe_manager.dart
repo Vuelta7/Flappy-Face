@@ -1,9 +1,9 @@
 import 'dart:math';
 
 import 'package:flame/components.dart';
-import 'package:flappy_face/constant.dart';
+import 'package:flappy_face/components/constant.dart';
+import 'package:flappy_face/components/pipe.dart';
 import 'package:flappy_face/game.dart';
-import 'package:flappy_face/pipe.dart';
 
 class PipeManager extends Component with HasGameRef<FlappyFaceGame> {
   //update -> every second (dt)
@@ -14,7 +14,6 @@ class PipeManager extends Component with HasGameRef<FlappyFaceGame> {
   @override
   void update(double dt) {
     pipeSpawnTimer += dt;
-    const double pipeInterval = 2;
 
     if (pipeSpawnTimer > pipeInterval) {
       pipeSpawnTimer = 0;
@@ -26,10 +25,6 @@ class PipeManager extends Component with HasGameRef<FlappyFaceGame> {
 
   void spawnPipe() {
     final double screenHeight = gameRef.size.y;
-    const double pipeGap = 150;
-    const double minPipeHeight = 50;
-    const double pipeWidth = 60;
-
     //calculate pipe heights
 
     //max possible height

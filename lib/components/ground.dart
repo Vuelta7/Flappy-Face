@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flappy_face/constant.dart';
+import 'package:flappy_face/components/constant.dart';
 import 'package:flappy_face/game.dart';
 
 class Ground extends SpriteComponent

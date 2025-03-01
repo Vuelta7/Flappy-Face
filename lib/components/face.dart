@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flappy_face/constant.dart';
+import 'package:flappy_face/components/constant.dart';
+import 'package:flappy_face/components/ground.dart';
+import 'package:flappy_face/components/pipe.dart';
 import 'package:flappy_face/game.dart';
-import 'package:flappy_face/ground.dart';
 
 class Face extends SpriteComponent with CollisionCallbacks {
   //init face
@@ -51,8 +52,13 @@ class Face extends SpriteComponent with CollisionCallbacks {
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
 
-    //check if the bird collides with ground
+    //check if the face collides with ground
     if (other is Ground) {
+      (parent as FlappyFaceGame).gameOver();
+    }
+
+    //check if the face collides with pipes
+    if (other is Pipe) {
       (parent as FlappyFaceGame).gameOver();
     }
   }

@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
-import 'package:flappy_face/background.dart';
+import 'package:flappy_face/components/background.dart';
+import 'package:flappy_face/components/constant.dart';
 import 'package:flappy_face/components/face.dart';
-import 'package:flappy_face/constant.dart';
-import 'package:flappy_face/ground.dart';
-import 'package:flappy_face/pipe_manager.dart';
+import 'package:flappy_face/components/ground.dart';
+import 'package:flappy_face/components/pipe.dart';
+import 'package:flappy_face/components/pipe_manager.dart';
+import 'package:flappy_face/components/score.dart';
 import 'package:flutter/material.dart';
 
 class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
@@ -25,6 +27,7 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
   late Background background;
   late Ground ground;
   late PipeManager pipeManager;
+  late ScoreText scoreText;
 
   //load
   @override
@@ -44,17 +47,25 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
     //load pipes
     pipeManager = PipeManager();
     add(pipeManager);
+
+    //load scores
+    scoreText = ScoreText();
+    add(scoreText);
   }
 
   //tap
-
   @override
   void onTap() {
     face.flap();
   }
 
-  //gameover
+  //scores
+  int score = 0;
+  void incrementScore() {
+    score += 1;
+  }
 
+  //gameover
   bool isGameOver = false;
 
   void gameOver() {
@@ -69,6 +80,7 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
       builder:
           (context) => AlertDialog(
             title: const Text('Game Over'),
+            content: Text("High Score: $score"),
             actions: [
               TextButton(
                 onPressed: () {
@@ -88,7 +100,10 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
   void resetGame() {
     face.position = Vector2(birdStartX, birdStartY);
     face.velocity = 0;
+    score = 0;
     isGameOver = false;
+    //remove all the pipes
+    children.whereType<Pipe>().forEach((pipe) => pipe.removeFromParent());
     resumeEngine();
   }
 }

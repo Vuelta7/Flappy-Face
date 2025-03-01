@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flappy_face/constant.dart';
+import 'package:flappy_face/components/constant.dart';
 import 'package:flappy_face/game.dart';
 
 class Pipe extends SpriteComponent
@@ -10,6 +10,10 @@ class Pipe extends SpriteComponent
   //determine if the pipe is top or bottom
   final bool isTopPipe;
 
+  //score
+  bool scored = false;
+
+  //init
   Pipe(Vector2 position, Vector2 size, {required this.isTopPipe})
     : super(position: position, size: size);
 
@@ -28,6 +32,14 @@ class Pipe extends SpriteComponent
   void update(double dt) {
     //scroll pipe to left
     position.x -= groundScrollingSpeed * dt;
+
+    if (!scored && position.x + size.x < gameRef.face.position.x) {
+      scored = true;
+
+      if (isTopPipe) {
+        gameRef.incrementScore();
+      }
+    }
 
     if (position.x + size.x <= 0) {
       removeFromParent();
