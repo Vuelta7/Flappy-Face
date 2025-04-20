@@ -11,6 +11,9 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.8
   flame:
+  file_picker: ^10.1.2
+  flutter_riverpod: ^2.6.1
+  shared_preferences: ^2.5.3
 
 dev_dependencies:
   flutter_test:

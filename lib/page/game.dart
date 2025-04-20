@@ -9,6 +9,7 @@ import 'package:flappy_face/components/ground.dart';
 import 'package:flappy_face/components/pipe.dart';
 import 'package:flappy_face/components/pipe_manager.dart';
 import 'package:flappy_face/components/score.dart';
+import 'package:flappy_face/page/home.dart';
 import 'package:flutter/material.dart';
 
 class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
@@ -22,6 +23,8 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
   -score
 
   */
+
+  final String imagePath;
 
   late Face face;
   late Background background;
@@ -37,7 +40,7 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
     add(background);
 
     //load face
-    face = Face();
+    face = Face(imagePath);
     add(face);
 
     //load ground
@@ -68,6 +71,13 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
   //gameover
   bool isGameOver = false;
 
+  FlappyFaceGame({
+    super.children,
+    super.world,
+    super.camera,
+    required this.imagePath,
+  });
+
   void gameOver() {
     // prevent multiple game over triggers
     if (isGameOver) return;
@@ -76,6 +86,7 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
     pauseEngine();
 
     showDialog(
+      barrierDismissible: false,
       context: buildContext!,
       builder:
           (context) => AlertDialog(
@@ -86,11 +97,19 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
                 onPressed: () {
                   //pop box
                   Navigator.pop(context);
-
                   //reset game
                   resetGame();
                 },
                 child: const Text('Restart'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                },
+                child: const Text('Home'),
               ),
             ],
           ),

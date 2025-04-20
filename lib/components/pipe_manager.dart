@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flappy_face/components/constant.dart';
 import 'package:flappy_face/components/pipe.dart';
-import 'package:flappy_face/game.dart';
+import 'package:flappy_face/page/game.dart';
 
 class PipeManager extends Component with HasGameRef<FlappyFaceGame> {
   //update -> every second (dt)

@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flame/components.dart';
-import 'package:flappy_face/game.dart';
+import 'package:flappy_face/page/game.dart';
 import 'package:flutter/material.dart';
 
 class ScoreText extends TextComponent with HasGameRef<FlappyFaceGame> {

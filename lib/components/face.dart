@@ -1,17 +1,20 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flappy_face/components/constant.dart';
 import 'package:flappy_face/components/ground.dart';
 import 'package:flappy_face/components/pipe.dart';
-import 'package:flappy_face/game.dart';
+import 'package:flappy_face/page/game.dart';
+import 'package:flutter/material.dart';
 
 class Face extends SpriteComponent with CollisionCallbacks {
+  final String imagePath;
   //init face
 
   //initialize bird position & size
-  Face()
+  Face(this.imagePath)
     : super(
         position: Vector2(birdStartX, birdStartY),
         size: Vector2(birdWidth, birdHeight),
@@ -25,7 +28,10 @@ class Face extends SpriteComponent with CollisionCallbacks {
   @override
   FutureOr<void> onLoad() async {
     //load bird sprite image
-    sprite = await Sprite.load('face.jpg');
+    final imageFile = File(imagePath);
+    final bytes = await imageFile.readAsBytes();
+    final image = await decodeImageFromList(bytes);
+    sprite = Sprite(image);
 
     //hit box
     add(RectangleHitbox());

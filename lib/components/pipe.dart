@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flappy_face/components/constant.dart';
-import 'package:flappy_face/game.dart';
+import 'package:flappy_face/page/game.dart';
 
 class Pipe extends SpriteComponent
     with CollisionCallbacks, HasGameRef<FlappyFaceGame> {
