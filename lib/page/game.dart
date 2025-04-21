@@ -10,6 +10,7 @@ import 'package:flappy_face/components/pipe.dart';
 import 'package:flappy_face/components/pipe_manager.dart';
 import 'package:flappy_face/components/score.dart';
 import 'package:flappy_face/page/home.dart';
+import 'package:flappy_face/utils/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
@@ -90,26 +91,49 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
       context: buildContext!,
       builder:
           (context) => AlertDialog(
-            title: const Text('Game Over'),
-            content: Text("High Score: $score"),
+            backgroundColor: Colors.cyan,
+            shadowColor: Colors.red[900],
+            elevation: 10,
+            title: Text(
+              'Game Over',
+              style: TextStyle(
+                fontFamily: 'Press',
+                fontSize: 30,
+                color: Colors.white,
+                shadows: [
+                  Shadow(color: Colors.red[900]!, offset: Offset(2, 2)),
+                ],
+              ),
+            ),
+            content: Text(
+              "High Score: $score",
+              style: TextStyle(
+                fontFamily: 'Press',
+                fontSize: 16,
+                color: Colors.white,
+                shadows: [
+                  Shadow(color: Colors.red[900]!, offset: Offset(2, 2)),
+                ],
+              ),
+            ),
             actions: [
-              TextButton(
-                onPressed: () {
+              GestureDetector(
+                onTap: () {
                   //pop box
                   Navigator.pop(context);
                   //reset game
                   resetGame();
                 },
-                child: const Text('Restart'),
+                child: MenuButton(text: 'Restart', color: Colors.red),
               ),
-              TextButton(
-                onPressed: () {
+              GestureDetector(
+                onTap: () {
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const HomePage()),
                   );
                 },
-                child: const Text('Home'),
+                child: MenuButton(text: 'Home', color: Colors.red),
               ),
             ],
           ),

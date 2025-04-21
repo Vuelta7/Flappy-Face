@@ -10,7 +10,12 @@ class ScoreText extends TextComponent with HasGameRef<FlappyFaceGame> {
     : super(
         text: '0',
         textRenderer: TextPaint(
-          style: TextStyle(color: Colors.grey, fontSize: 50),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 50,
+            fontFamily: 'Press',
+            shadows: [Shadow(color: Colors.red[900]!, offset: Offset(2, 2))],
+          ),
         ),
       );
 
