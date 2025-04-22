@@ -67,12 +67,16 @@ class _HomePageState extends State<HomePage> {
                       fontFamily: 'Press',
                       fontSize: 16,
                       color: Colors.white,
+                      shadows: [
+                        Shadow(color: Colors.red[900]!, offset: Offset(2, 2)),
+                      ],
                     ),
                   ),
                   imagePath != null
                       ? Image.file(File(imagePath!), height: 150)
                       : Text(
                         'No image selected',
+                        textAlign: TextAlign.center,
                         style: TextStyle(
                           fontFamily: 'Press',
                           fontSize: 16,
@@ -98,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                   });
                 }
               },
-              child: MenuButton(text: 'Select Image', color: Colors.cyan),
+              child: CustomButton(text: 'Select Image', color: Colors.cyan),
             ),
             GestureDetector(
               onTap: () async {
@@ -118,7 +122,7 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
               },
-              child: MenuButton(text: 'Play Game', color: Colors.cyan),
+              child: CustomButton(text: 'Play Game', color: Colors.cyan),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flappy_face/components/background.dart';
@@ -67,6 +68,7 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
   int score = 0;
   void incrementScore() {
     score += 1;
+    AudioPlayer().play(AssetSource('audio/scored.mp3'));
   }
 
   //gameover
@@ -81,6 +83,7 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
 
   void gameOver() {
     // prevent multiple game over triggers
+    AudioPlayer().play(AssetSource('audio/lose.mp3'));
     if (isGameOver) return;
 
     isGameOver = true;
@@ -124,7 +127,7 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
                   //reset game
                   resetGame();
                 },
-                child: MenuButton(text: 'Restart', color: Colors.red),
+                child: CustomButton(text: 'Restart', color: Colors.red),
               ),
               GestureDetector(
                 onTap: () {
@@ -133,7 +136,7 @@ class FlappyFaceGame extends FlameGame with TapDetector, HasCollisionDetection {
                     MaterialPageRoute(builder: (context) => const HomePage()),
                   );
                 },
-                child: MenuButton(text: 'Home', color: Colors.red),
+                child: CustomButton(text: 'Home', color: Colors.red),
               ),
             ],
           ),

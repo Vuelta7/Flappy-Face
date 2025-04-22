@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MenuButton extends StatelessWidget {
+class CustomButton extends StatelessWidget {
   final String text;
   final double width;
   final double height;
   final Color color;
-  const MenuButton({
+  const CustomButton({
     super.key,
     required this.text,
     this.width = 220,

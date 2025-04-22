@@ -1,5 +1,5 @@
 name: flappy_face
-description: "A new Flutter project."
+description: "A flutter flappy bird clone, but instead of a bird flapping, user can choose face image in their storage to flap."
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -14,18 +14,27 @@ dependencies:
   file_picker: ^10.1.2
   flutter_riverpod: ^2.6.1
   shared_preferences: ^2.5.3
+  audioplayers: ^6.4.0 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  flutter_launcher_icons: ^0.14.1
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/audio/
 
   fonts:
     - family: Press
       fonts:
         - asset: assets/fonts/PressStart2P-Regular.ttf
+
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  min_sdk_android: 21
+  image_path: "assets/images/flappy_face_icon.webp"

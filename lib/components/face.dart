@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flappy_face/components/constant.dart';
@@ -40,6 +41,7 @@ class Face extends SpriteComponent with CollisionCallbacks {
   //jump/flap
   void flap() {
     velocity = jumpStrength;
+    AudioPlayer().play(AssetSource('audio/flap.mp3'));
   }
 
   //update
